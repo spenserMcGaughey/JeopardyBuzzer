@@ -1,11 +1,26 @@
-const int redInPin = 2;
+/* Jeopardy Buzzers Arduino program
+* author: Spenser McGaughey
+* date: 06/27/2021
+*/
+
+/* The following 7 lines define the switch inputs and LED outputs.
+* The colors are arbitrary, just what I used when I first wrote the program.
+* In pins are for the buttons or whatever is used as the switches. 
+* Out pins are for the LEDs
+*/
+const int redInPin = 2; 
 const int blueInPin = 4;
 const int greenInPin  = 7;
 const int controlPin = A0;
-const int blueOutPin = 12;
 const int redOutPin = 8;
+const int blueOutPin = 12;
 const int greenOutPin = 13;
 
+/* The following are some important variables
+* buttonState variables represent the state of each button
+* controlState is the state of the host's button
+* lastControlState allows for keeping track of if the host's button state has changed
+*/
 int buttonStateR = 0;
 int buttonStateB = 0;
 int buttonStateG = 0;
@@ -47,7 +62,6 @@ if(controlState!=lastControlState){
    lastControlState=controlState;
 }
  if(stateChange!= lastStateChange){
-  //lastTime = time;
   if(buttonStateR==HIGH){
     digitalWrite(redOutPin, HIGH);
     digitalWrite(blueOutPin, LOW);
@@ -75,6 +89,7 @@ if(controlState!=lastControlState){
     digitalWrite(greenOutPin, LOW);
   }
 
+  // The following lines make the LEDs flash when the time is up
   if(time>=(lastTime+three)){
   digitalWrite(redOutPin, HIGH);
   digitalWrite(blueOutPin, HIGH);
